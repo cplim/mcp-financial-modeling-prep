@@ -37,6 +37,14 @@ export interface BalanceSheet {
   totalStockholdersEquity: number
 }
 
+export interface CashFlowStatement {
+  symbol: string
+  date: string
+  operatingCashFlow: number
+  capitalExpenditure: number
+  freeCashFlow: number
+}
+
 export class FMPClient {
   private readonly apiKey: string
   private readonly baseURL = 'https://financialmodelingprep.com/api/v3'
@@ -71,11 +79,11 @@ export class FMPClient {
     return this.makeRequest<BalanceSheet[]>(`/balance-sheet-statement/${symbol}`, { limit })
   }
 
-  async getCashFlowStatement(symbol: string, limit: number = 5): Promise<any[]> {
-    return this.makeRequest<any[]>(`/cash-flow-statement/${symbol}`, { limit })
+  async getCashFlowStatement(symbol: string, limit: number = 5): Promise<CashFlowStatement[]> {
+    return this.makeRequest<CashFlowStatement[]>(`/cash-flow-statement/${symbol}`, { limit })
   }
 
-  private async makeRequest<T>(endpoint: string, params: Record<string, any> = {}): Promise<T> {
+  private async makeRequest<T>(endpoint: string, params: Record<string, string | number> = {}): Promise<T> {
     try {
       const response: AxiosResponse<T> = await axios({
         method: 'GET',
