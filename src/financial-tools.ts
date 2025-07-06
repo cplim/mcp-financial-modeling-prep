@@ -1,4 +1,4 @@
-import { FMPClient, CompanyProfile, IncomeStatement, StockPrice, DCFValuation, BalanceSheet } from './fmp-client'
+import { FMPClient, CompanyProfile, IncomeStatement, StockPrice } from './fmp-client'
 
 export interface CompanyAnalysis {
   symbol: string
